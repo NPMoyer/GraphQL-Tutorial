@@ -1,4 +1,7 @@
 ﻿using GraphQL;
+using GraphQL.Server;
+using GraphQL.Server.Transports.AspNetCore;
+using GraphQL.Server.Transports.WebSockets;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.DependencyInjection;
@@ -21,8 +24,8 @@ namespace Server
             services.AddSingleton<OrdersQuery>();
             services.AddSingleton<OrdersSchema>();
             services.AddSingleton<IDependencyResolver>(
-                c => new FuncDependencyResolver(type =>
-                     c.GetRequiredService(type)));
+                c => new FuncDependencyResolver(type => c.GetRequiredService(type)));
+            services.AddGraphQL().AddWebSockets().AddDataLoader();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -34,6 +37,9 @@ namespace Server
             }
             app.UseDefaultFiles();
             app.UseStaticFiles();
+            app.UseWebSockets();
+            app.UseGraphQLWebSockets<OrdersSchema>("/graphql");
+            app.UseGraphQL<OrdersSchema>("/graphql");
         }
     }
 }
