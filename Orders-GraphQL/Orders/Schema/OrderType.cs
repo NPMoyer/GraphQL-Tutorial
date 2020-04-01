@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using GraphQL.Types;
+﻿using GraphQL.Types;
 using Orders.Models;
 using Orders.Services;
 
