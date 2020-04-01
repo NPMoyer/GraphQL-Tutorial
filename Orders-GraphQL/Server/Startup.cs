@@ -23,6 +23,8 @@ namespace Server
             services.AddSingleton<OrderStatusesEnum>();
             services.AddSingleton<OrdersQuery>();
             services.AddSingleton<OrdersSchema>();
+            services.AddSingleton<OrderCreateInputType>();
+            services.AddSingleton<OrdersMutation>();
             services.AddSingleton<IDependencyResolver>(
                 c => new FuncDependencyResolver(type => c.GetRequiredService(type)));
             services.AddGraphQL().AddWebSockets().AddDataLoader();
