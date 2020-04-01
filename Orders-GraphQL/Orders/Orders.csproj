@@ -16,4 +16,9 @@
     <Folder Include="Services\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <PackageReference Include="GraphQL" Version="2.4.0" />
+    <PackageReference Include="System.Reactive" Version="4.3.2" />
+  </ItemGroup>
+
 </Project>
